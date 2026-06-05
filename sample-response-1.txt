@@ -1,0 +1,225 @@
+Weekly Git Commit Analyzer
+==========================
+Repository: /home/marc/Documents/cashtracker/cashtracker
+Window: 7 days ago
+Commits found: 8
+Estimated hours: 6.6 (heuristic)
+
+Code Quality Signals
+--------------------
+- Reviewed 8 commits touching 22 files.
+- Total churn: +1401/-101 lines (1502 changed).
+- 1 large commit(s) may need closer review.
+- No obvious configuration or sensitive-impact file changes detected.
+- No test-related file changes detected in the commit stats.
+
+Effort Estimate Notes
+---------------------
+- 2026-05-29: 1 commit, counted as 0.5h base effort.
+- 2026-05-30: 2 commits, estimated 2.5h.
+- 2026-05-31: 1 commit, counted as 0.5h base effort.
+- 2026-06-01: 4 commits, estimated 3.1h.
+
+Recommendations
+---------------
+- Review large commits manually and consider smaller commits next time.
+- Confirm behavior manually or add tests for the changed code paths.
+
+Commit Summary
+--------------
+- efrizal-m <efrizalsy0424@gmail.com>: 6 commit(s)
+- blacklist <efrizalsy0424@gmail.com>: 2 commit(s)
+- 2026-05-29 2adc22e2 Show group storage modes
+- 2026-05-30 ad0504c6 update: pp and term
+- 2026-05-30 b4dc9176 Disable sheets mode option
+- 2026-05-31 d178e805 feat: add manual payment flow, public pricing page, and admin subscription management
+- 2026-06-01 a56cee63 feat: add chat transaction edit badges
+- 2026-06-01 3e899b9a temp: remove moni char
+- 2026-06-01 bdf1cb6a update: new landing page without moni. only cashper
+- 2026-06-01 632a13c2 Add chat reply preference controls
+
+LLM Analysis Prompt
+-------------------
+You are a senior engineer reviewing one developer's git commits.
+Analyze only the evidence below. Do not invent unstated implementation details.
+When estimating effort, explain uncertainty and treat commit timestamps as imperfect signals.
+
+Goals:
+1. Assess code quality from commit metadata, file changes, churn, and available stats.
+2. Estimate hours spent during the selected period.
+3. Identify risks, missing tests, and actionable improvements.
+
+Repository: /home/marc/Documents/cashtracker/cashtracker
+Window: 7 days ago
+Commit count: 8
+Heuristic estimated hours: 6.6
+
+Hour-estimation method:
+- 2026-05-29: 1 commit, counted as 0.5h base effort.
+- 2026-05-30: 2 commits, estimated 2.5h.
+- 2026-05-31: 1 commit, counted as 0.5h base effort.
+- 2026-06-01: 4 commits, estimated 3.1h.
+
+Local heuristic findings:
+- Reviewed 8 commits touching 22 files.
+- Total churn: +1401/-101 lines (1502 changed).
+- 1 large commit(s) may need closer review.
+- No obvious configuration or sensitive-impact file changes detected.
+- No test-related file changes detected in the commit stats.
+
+Commits:
+
+Commit 2adc22e29c59
+Author: blacklist <efrizalsy0424@gmail.com>
+Date: 2026-05-29T13:19:19+07:00
+Subject: Show group storage modes
+Body: [empty]
+Files changed: 2
+Churn: 66 lines
+Changed files:
+- src/lib/api.ts: +7/-0
+- src/pages/GroupsPage.tsx: +56/-3
+Stat summary:
+src/lib/api.ts           |  7 ++++++
+ src/pages/GroupsPage.tsx | 59 +++++++++++++++++++++++++++++++++++++++++++++---
+ 2 files changed, 63 insertions(+), 3 deletions(-)
+
+Commit ad0504c65cf9
+Author: efrizal-m <efrizalsy0424@gmail.com>
+Date: 2026-05-30T06:01:19+07:00
+Subject: update: pp and term
+Body: [empty]
+Files changed: 2
+Churn: 20 lines
+Changed files:
+- src/i18n/index.ts: +16/-0
+- src/pages/PublicInfoPage.tsx: +2/-2
+Stat summary:
+src/i18n/index.ts            | 16 ++++++++++++++++
+ src/pages/PublicInfoPage.tsx |  4 ++--
+ 2 files changed, 18 insertions(+), 2 deletions(-)
+
+Commit b4dc9176d2d1
+Author: blacklist <efrizalsy0424@gmail.com>
+Date: 2026-05-30T16:21:25+07:00
+Subject: Disable sheets mode option
+Body: [empty]
+Files changed: 2
+Churn: 46 lines
+Changed files:
+- src/lib/api.ts: +7/-2
+- src/pages/GroupsPage.tsx: +37/-0
+Stat summary:
+src/lib/api.ts           |  9 +++++++--
+ src/pages/GroupsPage.tsx | 37 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 44 insertions(+), 2 deletions(-)
+
+Commit d178e805fe08
+Author: efrizal-m <efrizalsy0424@gmail.com>
+Date: 2026-05-31T18:43:28+07:00
+Subject: feat: add manual payment flow, public pricing page, and admin subscription management
+Body: - Add public /pricing route (PricingPage with publicMode prop) accessible without login
+- Add /payment route with PaymentPage for manual bank transfer submissions
+- Add admin UI for manual subscription management and payment proof review
+- Add connectGoogleSheetsWithCode and admin subscription/payment APIs in api.ts
+- Conditionally hide voucher section via allowVoucher prop in SubscribeConfirmModal
+- Add i18n translations (ID + EN) for payment page and footer pricing link
+- Fix dark mode styles on PricingPage (cashfiliate section) and AchievementsPage
+- Add Moni mascot image, logo assets, and GoogleSheetsCallbackPage
+Files changed: 15
+Churn: 1116 lines
+Changed files:
+- .env.example: +6/-0
+- public/img/moni.png: +0/-0
+- public/logo/bank-jago-1575x512.png: +0/-0
+- public/logo/bank-mandiri-1745x512.png: +0/-0
+- public/logo/dana-1791x512.png: +0/-0
+- src/components/SubscribeConfirmModal.tsx: +50/-46
+- src/i18n/index.ts: +70/-2
+- src/lib/api.ts: +124/-0
+- src/pages/AchievementsPage.tsx: +1/-1
+- src/pages/AdminDashboardPage.tsx: +375/-2
+- src/pages/GoogleSheetsCallbackPage.tsx: +93/-0
+- src/pages/PaymentPage.tsx: +297/-0
+- src/pages/PricingPage.tsx: +35/-10
+- src/routes/AppRoutes.tsx: +3/-0
+- src/sections/Footer.tsx: +1/-0
+Stat summary:
+.env.example                             |   6 +
+ public/img/moni.png                      | Bin 0 -> 1173220 bytes
+ public/logo/bank-jago-1575x512.png       | Bin 0 -> 63777 bytes
+ public/logo/bank-mandiri-1745x512.png    | Bin 0 -> 67523 bytes
+ public/logo/dana-1791x512.png            | Bin 0 -> 107740 bytes
+ src/components/SubscribeConfirmModal.tsx |  96 ++++----
+ src/i18n/index.ts                        |  72 +++++-
+ src/lib/api.ts                           | 124 ++++++++++
+ src/pages/AchievementsPage.tsx           |   2 +-
+ src/pages/AdminDashboardPage.tsx         | 377 ++++++++++++++++++++++++++++++-
+ src/pages/GoogleSheetsCallbackPage.tsx   |  93 ++++++++
+ src/pages/PaymentPage.tsx                | 297 ++++++++++++++++++++++++
+ src/pages/PricingPage.tsx                |  45 +++-
+ src/routes/AppRoutes.tsx                 |   3 +
+ src/sections/Footer.tsx                  |   1 +
+ 15 files changed, 1055 insertions(+), 61 deletions(-)
+
+Commit a56cee63bdb4
+Author: efrizal-m <efrizalsy0424@gmail.com>
+Date: 2026-06-01T10:50:54+07:00
+Subject: feat: add chat transaction edit badges
+Body: [empty]
+Files changed: 4
+Churn: 105 lines
+Changed files:
+- src/components/chat/ChatBubble.tsx: +33/-8
+- src/components/chat/ChatInput.tsx: +13/-0
+- src/components/chat/ShortenIdBadge.tsx: +49/-0
+- src/lib/socket.ts: +1/-1
+Stat summary:
+src/components/chat/ChatBubble.tsx     | 41 ++++++++++++++++++++++------
+ src/components/chat/ChatInput.tsx      | 13 +++++++++
+ src/components/chat/ShortenIdBadge.tsx | 49 ++++++++++++++++++++++++++++++++++
+ src/lib/socket.ts                      |  2 +-
+ 4 files changed, 96 insertions(+), 9 deletions(-)
+
+Commit 3e899b9ab07a
+Author: efrizal-m <efrizalsy0424@gmail.com>
+Date: 2026-06-01T11:13:16+07:00
+Subject: temp: remove moni char
+Body: [empty]
+Files changed: 1
+Churn: 4 lines
+Changed files:
+- src/pages/PricingPage.tsx: +2/-2
+Stat summary:
+src/pages/PricingPage.tsx | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Commit bdf1cb6abc8b
+Author: efrizal-m <efrizalsy0424@gmail.com>
+Date: 2026-06-01T11:24:19+07:00
+Subject: update: new landing page without moni. only cashper
+Body: [empty]
+Files changed: 1
+Churn: 42 lines
+Changed files:
+- src/i18n/index.ts: +21/-21
+Stat summary:
+src/i18n/index.ts | 42 +++++++++++++++++++++---------------------
+ 1 file changed, 21 insertions(+), 21 deletions(-)
+
+Commit 632a13c23deb
+Author: efrizal-m <efrizalsy0424@gmail.com>
+Date: 2026-06-01T21:29:40+07:00
+Subject: Add chat reply preference controls
+Body: [empty]
+Files changed: 3
+Churn: 103 lines
+Changed files:
+- src/i18n/index.ts: +20/-0
+- src/lib/api.ts: +12/-0
+- src/pages/AccountSettingsPage.tsx: +70/-1
+Stat summary:
+src/i18n/index.ts                 | 20 +++++++++++
+ src/lib/api.ts                    | 12 +++++++
+ src/pages/AccountSettingsPage.tsx | 71 ++++++++++++++++++++++++++++++++++++++-
+ 3 files changed, 102 insertions(+), 1 deletion(-)

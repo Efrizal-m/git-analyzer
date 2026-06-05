@@ -1,0 +1,436 @@
+Weekly Git Commit Analyzer
+==========================
+Repository: /home/marc/Documents/cashtracker/cashtracker-server
+Window: 7 days ago
+Commits found: 9
+Estimated hours: 9.9 (heuristic)
+
+Code Quality Signals
+--------------------
+- Reviewed 9 commits touching 78 files.
+- Total churn: +12047/-2470 lines (14517 changed).
+- 7 large commit(s) may need closer review.
+- Configuration or sensitive-impact files changed: 2.
+- Test-related files changed: 3.
+- Documentation files changed: 2.
+
+Effort Estimate Notes
+---------------------
+- 2026-05-29: 1 commit, counted as 0.5h base effort.
+- 2026-05-30: 2 commits, estimated 2.5h.
+- 2026-05-31: 1 commit, counted as 0.5h base effort.
+- 2026-06-01: 3 commits, estimated 4.5h.
+- 2026-06-02: 2 commits, estimated 1.9h.
+
+Recommendations
+---------------
+- Review large commits manually and consider smaller commits next time.
+
+Commit Summary
+--------------
+- efrizal-m <efrizalsy0424@gmail.com>: 6 commit(s)
+- blacklist <efrizalsy0424@gmail.com>: 3 commit(s)
+- 2026-05-29 4982dea9 Implement duo storage foundation
+- 2026-05-30 b23bff74 wip: sheets integration
+- 2026-05-30 27e80a0e Implement sheets mode lifecycle
+- 2026-05-31 d99dab66 feat: add manual payment submission, S3 asset storage, and admin subscription management
+- 2026-06-01 ccb2b522 feat: add chat transaction edit commands
+- 2026-06-01 b9a9db59 fix: build error by aws
+- 2026-06-01 bea554cf Add chat response display preferences
+- 2026-06-02 f1beeb47 Add reply-to-override tracking
+- 2026-06-02 c5c969f5 Add categorization foundation tracking
+
+LLM Analysis Prompt
+-------------------
+You are a senior engineer reviewing one developer's git commits.
+Analyze only the evidence below. Do not invent unstated implementation details.
+When estimating effort, explain uncertainty and treat commit timestamps as imperfect signals.
+
+Goals:
+1. Assess code quality from commit metadata, file changes, churn, and available stats.
+2. Estimate hours spent during the selected period.
+3. Identify risks, missing tests, and actionable improvements.
+
+Repository: /home/marc/Documents/cashtracker/cashtracker-server
+Window: 7 days ago
+Commit count: 9
+Heuristic estimated hours: 9.9
+
+Hour-estimation method:
+- 2026-05-29: 1 commit, counted as 0.5h base effort.
+- 2026-05-30: 2 commits, estimated 2.5h.
+- 2026-05-31: 1 commit, counted as 0.5h base effort.
+- 2026-06-01: 3 commits, estimated 4.5h.
+- 2026-06-02: 2 commits, estimated 1.9h.
+
+Local heuristic findings:
+- Reviewed 9 commits touching 78 files.
+- Total churn: +12047/-2470 lines (14517 changed).
+- 7 large commit(s) may need closer review.
+- Configuration or sensitive-impact files changed: 2.
+- Test-related files changed: 3.
+- Documentation files changed: 2.
+
+Commits:
+
+Commit 4982dea90a93
+Author: blacklist <efrizalsy0424@gmail.com>
+Date: 2026-05-29T13:19:12+07:00
+Subject: Implement duo storage foundation
+Body: [empty]
+Files changed: 41
+Churn: 4033 lines
+Changed files:
+- .env.example: +6/-0
+- Cargo.lock: +84/-0
+- Cargo.toml: +1/-0
+- migrations/049_add_group_storage_mode.sql: +78/-0
+- migrations/050_add_user_google_tokens.sql: +26/-0
+- migrations/051_tx_storage_guard_trigger.sql: +33/-0
+- migrations/052_add_sheet_rate_usage.sql: +13/-0
+- src/app.rs: +8/-0
+- src/bin/google_token_health.rs: +63/-0
+- src/bin/migrate.rs: +206/-0
+- src/bin/process_recurring.rs: +39/-17
+- src/domain/models.rs: +80/-0
+- src/domain/subscription.rs: +9/-0
+- src/handler/api.rs: +526/-228
+- src/infra/crypto.rs: +106/-0
+- src/infra/db.rs: +3/-6
+- src/infra/google_sheets.rs: +296/-0
+- src/infra/google_tokens.rs: +241/-0
+- src/infra/invoice_api.rs: +13/-3
+- src/infra/mod.rs: +4/-0
+- src/infra/rate_limit.rs: +84/-0
+- src/infra/telegram.rs: +20/-10
+- src/infra/vapid.rs: +8/-3
+- src/infra/voice_api.rs: +13/-3
+- src/lib.rs: +1/-0
+- src/main.rs: +1/-0
+- src/middleware/internal_auth.rs: +2/-6
+- src/middleware/mod.rs: +1/-0
+- src/middleware/storage_mode.rs: +40/-0
+- src/service/chat_push.rs: +2/-3
+- src/service/group_notifier.rs: +15/-17
+- src/service/group_service.rs: +38/-16
+- src/service/message_service.rs: +216/-174
+- src/service/mod.rs: +1/-0
+- src/service/push_subscription.rs: +11/-18
+- src/service/sheets_provisioner.rs: +117/-0
+- src/service/whatsapp_service.rs: +174/-169
+- src/storage/duo.rs: +57/-0
+- src/storage/mod.rs: +135/-0
+- src/storage/server.rs: +207/-0
+- src/storage/sheets.rs: +382/-0
+Stat summary:
+.env.example                                |   6 +
+ Cargo.lock                                  |  84 ++++
+ Cargo.toml                                  |   1 +
+ migrations/049_add_group_storage_mode.sql   |  78 +++
+ migrations/050_add_user_google_tokens.sql   |  26 +
+ migrations/051_tx_storage_guard_trigger.sql |  33 ++
+ migrations/052_add_sheet_rate_usage.sql     |  13 +
+ src/app.rs                                  |   8 +
+ src/bin/google_token_health.rs              |  63 +++
+ src/bin/migrate.rs                          | 206 ++++++++
+ src/bin/process_recurring.rs                |  56 ++-
+ src/domain/models.rs                        |  80 +++
+ src/domain/subscription.rs                  |   9 +
+ src/handler/api.rs                          | 754 +++++++++++++++++++---------
+ src/infra/crypto.rs                         | 106 ++++
+ src/infra/db.rs                             |   9 +-
+ src/infra/google_sheets.rs                  | 296 +++++++++++
+ src/infra/google_tokens.rs                  | 241 +++++++++
+ src/infra/invoice_api.rs                    |  16 +-
+ src/infra/mod.rs                            |   4 +
+ src/infra/rate_limit.rs                     |  84 ++++
+ src/infra/telegram.rs                       |  30 +-
+ src/infra/vapid.rs                          |  11 +-
+ src/infra/voice_api.rs                      |  16 +-
+ src/lib.rs                                  |   1 +
+ src/main.rs                                 |   1 +
+ src/middleware/internal_auth.rs             |   8 +-
+ src/middleware/mod.rs                       |   1 +
+ src/middleware/storage_mode.rs              |  40 ++
+ src/service/chat_push.rs                    |   5 +-
+ src/service/group_notifier.rs               |  32 +-
+ src/service/group_service.rs                |  54 +-
+ src/service/message_service.rs              | 390 +++++++-------
+ src/service/mod.rs                          |   1 +
+ src/service/push_subscription.rs            |  29 +-
+ src/service/sheets_provisioner.rs           | 117 +++++
+ src/service/whatsapp_service.rs             | 343 ++++++-------
+ src/storage/duo.rs                          |  57 +++
+ src/storage/mod.rs                          | 135 +++++
+ src/storage/server.rs                       | 207 ++++++++
+ src/storage/sheets.rs                       | 382 ++++++++++++++
+ 41 files changed, 3360 insertions(+), 673 deletions(-)
+
+Commit b23bff748729
+Author: blacklist <efrizalsy0424@gmail.com>
+Date: 2026-05-30T06:46:39+07:00
+Subject: wip: sheets integration
+Body: [empty]
+Files changed: 6
+Churn: 269 lines
+Changed files:
+- .env.example: +1/-0
+- src/app.rs: +8/-0
+- src/handler/api.rs: +122/-4
+- src/insight/db.rs: +40/-33
+- src/ranking/matcher.rs: +18/-22
+- src/service/gamification.rs: +21/-0
+Stat summary:
+.env.example                |   1 +
+ src/app.rs                  |   8 +++
+ src/handler/api.rs          | 126 ++++++++++++++++++++++++++++++++++++++++++--
+ src/insight/db.rs           |  73 +++++++++++++------------
+ src/ranking/matcher.rs      |  40 +++++++-------
+ src/service/gamification.rs |  21 ++++++++
+ 6 files changed, 210 insertions(+), 59 deletions(-)
+
+Commit 27e80a0e53b8
+Author: blacklist <efrizalsy0424@gmail.com>
+Date: 2026-05-30T16:21:16+07:00
+Subject: Implement sheets mode lifecycle
+Body: [empty]
+Files changed: 15
+Churn: 1231 lines
+Changed files:
+- docs/privacy-sheets-mode.md: +23/-0
+- migrations/053_group_conversion_log.sql: +17/-0
+- src/app.rs: +26/-0
+- src/bin/migrate.rs: +32/-0
+- src/handler/admin.rs: +149/-21
+- src/handler/api.rs: +362/-5
+- src/infra/google_sheets.rs: +5/-1
+- src/infra/metrics.rs: +81/-0
+- src/infra/mod.rs: +1/-0
+- src/ranking/learner.rs: +56/-49
+- src/service/conversion_service.rs: +320/-0
+- src/service/mod.rs: +1/-0
+- src/service/subscription_service.rs: +57/-0
+- src/storage/mod.rs: +2/-0
+- src/storage/sheets.rs: +23/-0
+Stat summary:
+docs/privacy-sheets-mode.md             |  23 ++
+ migrations/053_group_conversion_log.sql |  17 ++
+ src/app.rs                              |  26 +++
+ src/bin/migrate.rs                      |  32 +++
+ src/handler/admin.rs                    | 170 +++++++++++++--
+ src/handler/api.rs                      | 367 +++++++++++++++++++++++++++++++-
+ src/infra/google_sheets.rs              |   6 +-
+ src/infra/metrics.rs                    |  81 +++++++
+ src/infra/mod.rs                        |   1 +
+ src/ranking/learner.rs                  | 105 ++++-----
+ src/service/conversion_service.rs       | 320 ++++++++++++++++++++++++++++
+ src/service/mod.rs                      |   1 +
+ src/service/subscription_service.rs     |  57 +++++
+ src/storage/mod.rs                      |   2 +
+ src/storage/sheets.rs                   |  23 ++
+ 15 files changed, 1155 insertions(+), 76 deletions(-)
+
+Commit d99dab66a86e
+Author: efrizal-m <efrizalsy0424@gmail.com>
+Date: 2026-05-31T18:43:45+07:00
+Subject: feat: add manual payment submission, S3 asset storage, and admin subscription management
+Body: - Add POST /payment/manual endpoint for receiving manual bank transfer proof uploads
+- Add GET/POST /admin/subscriptions for listing and updating user subscriptions manually
+- Add GET /admin/manual-payments and POST /admin/manual-payments/:id/approve
+- Add infra/assets module with unified S3-based file storage (aws-sdk-s3 v1)
+- Add migration 054: uploaded_files and manual_payment_submissions tables
+- Add SubscriptionService::set_manual_subscription() for admin-controlled plan changes
+- Unify S3 config from BLOG_S3_* to S3_* env vars with blog-specific fallbacks
+- Add Xendit payment gateway reference doc and migration SQL file
+Files changed: 12
+Churn: 2388 lines
+Changed files:
+- .env.example: +19/-14
+- Cargo.lock: +1100/-37
+- Cargo.toml: +3/-0
+- docs/xendit-payment-gateway-reference.md: +22/-0
+- migrations/054_add_manual_payment_submissions.sql: +60/-0
+- src/app.rs: +17/-0
+- src/bin/migrate.rs: +96/-0
+- src/handler/admin.rs: +358/-25
+- src/handler/subscription.rs: +277/-2
+- src/infra/assets.rs: +218/-0
+- src/infra/mod.rs: +1/-0
+- src/service/subscription_service.rs: +139/-0
+Stat summary:
+.env.example                                      |   33 +-
+ Cargo.lock                                        | 1137 ++++++++++++++++++++-
+ Cargo.toml                                        |    3 +
+ docs/xendit-payment-gateway-reference.md          |   22 +
+ migrations/054_add_manual_payment_submissions.sql |   60 ++
+ src/app.rs                                        |   17 +
+ src/bin/migrate.rs                                |   96 ++
+ src/handler/admin.rs                              |  383 ++++++-
+ src/handler/subscription.rs                       |  279 ++++-
+ src/infra/assets.rs                               |  218 ++++
+ src/infra/mod.rs                                  |    1 +
+ src/service/subscription_service.rs               |  139 +++
+ 12 files changed, 2310 insertions(+), 78 deletions(-)
+
+Commit ccb2b522c2c0
+Author: efrizal-m <efrizalsy0424@gmail.com>
+Date: 2026-06-01T10:50:54+07:00
+Subject: feat: add chat transaction edit commands
+Body: [empty]
+Files changed: 11
+Churn: 3783 lines
+Changed files:
+- migrations/055_add_transaction_edit_type.sql: +5/-0
+- src/app.rs: +11/-2
+- src/handler/internal.rs: +324/-150
+- src/service/batch_context.rs: +154/-0
+- src/service/edit_command.rs: +1089/-0
+- src/service/edit_executor.rs: +987/-0
+- src/service/message_service.rs: +147/-55
+- src/service/mod.rs: +4/-0
+- src/service/shorten_id.rs: +316/-0
+- src/service/whatsapp_service.rs: +93/-14
+- tests/property_edit_transaction.rs: +432/-0
+Stat summary:
+migrations/055_add_transaction_edit_type.sql |    5 +
+ src/app.rs                                   |   13 +-
+ src/handler/internal.rs                      |  474 +++++++----
+ src/service/batch_context.rs                 |  154 ++++
+ src/service/edit_command.rs                  | 1089 ++++++++++++++++++++++++++
+ src/service/edit_executor.rs                 |  987 +++++++++++++++++++++++
+ src/service/message_service.rs               |  202 +++--
+ src/service/mod.rs                           |    4 +
+ src/service/shorten_id.rs                    |  316 ++++++++
+ src/service/whatsapp_service.rs              |  107 ++-
+ tests/property_edit_transaction.rs           |  432 ++++++++++
+ 11 files changed, 3562 insertions(+), 221 deletions(-)
+
+Commit b9a9db591a2d
+Author: efrizal-m <efrizalsy0424@gmail.com>
+Date: 2026-06-01T16:41:14+07:00
+Subject: fix: build error by aws
+Body: [empty]
+Files changed: 5
+Churn: 1411 lines
+Changed files:
+- Cargo.lock: +37/-1100
+- Cargo.toml: +0/-3
+- Dockerfile: +2/-1
+- src/infra/assets.rs: +214/-47
+- tests/property_active_group_membership.proptest-regressions: +7/-0
+Stat summary:
+Cargo.lock                                         | 1137 +-------------------
+ Cargo.toml                                         |    3 -
+ Dockerfile                                         |    3 +-
+ src/infra/assets.rs                                |  261 ++++-
+ ...ty_active_group_membership.proptest-regressions |    7 +
+ 5 files changed, 260 insertions(+), 1151 deletions(-)
+
+Commit bea554cfa399
+Author: efrizal-m <efrizalsy0424@gmail.com>
+Date: 2026-06-01T21:29:40+07:00
+Subject: Add chat response display preferences
+Body: [empty]
+Files changed: 12
+Churn: 496 lines
+Changed files:
+- migrations/056_add_response_display_prefs.sql: +8/-0
+- src/app.rs: +1/-0
+- src/bin/migrate.rs: +16/-0
+- src/bin/migrate_down.rs: +10/-0
+- src/handler/api.rs: +52/-4
+- src/service/display_prefs.rs: +60/-0
+- src/service/edit_command.rs: +68/-74
+- src/service/edit_executor.rs: +25/-52
+- src/service/message_service.rs: +27/-21
+- src/service/mod.rs: +1/-0
+- src/service/shorten_id.rs: +31/-28
+- src/service/whatsapp_service.rs: +12/-6
+Stat summary:
+migrations/056_add_response_display_prefs.sql |   8 ++
+ src/app.rs                                    |   1 +
+ src/bin/migrate.rs                            |  16 +++
+ src/bin/migrate_down.rs                       |  10 ++
+ src/handler/api.rs                            |  56 +++++++++-
+ src/service/display_prefs.rs                  |  60 +++++++++++
+ src/service/edit_command.rs                   | 142 ++++++++++++--------------
+ src/service/edit_executor.rs                  |  77 +++++---------
+ src/service/message_service.rs                |  48 +++++----
+ src/service/mod.rs                            |   1 +
+ src/service/shorten_id.rs                     |  59 ++++++-----
+ src/service/whatsapp_service.rs               |  18 ++--
+ 12 files changed, 311 insertions(+), 185 deletions(-)
+
+Commit f1beeb470deb
+Author: efrizal-m <efrizalsy0424@gmail.com>
+Date: 2026-06-02T07:20:05+07:00
+Subject: Add reply-to-override tracking
+Body: [empty]
+Files changed: 13
+Churn: 318 lines
+Changed files:
+- migrations/057_add_source_message_id.sql: +10/-0
+- src/bin/migrate.rs: +16/-0
+- src/bin/process_recurring.rs: +1/-0
+- src/domain/models.rs: +14/-0
+- src/handler/api.rs: +1/-0
+- src/handler/internal.rs: +3/-0
+- src/handler/telegram.rs: +26/-5
+- src/service/message_service.rs: +79/-0
+- src/service/mod.rs: +1/-0
+- src/service/reply_override.rs: +97/-0
+- src/service/whatsapp_service.rs: +49/-7
+- src/storage/mod.rs: +3/-0
+- src/storage/server.rs: +4/-2
+Stat summary:
+migrations/057_add_source_message_id.sql | 10 ++++
+ src/bin/migrate.rs                       | 16 ++++++
+ src/bin/process_recurring.rs             |  1 +
+ src/domain/models.rs                     | 14 +++++
+ src/handler/api.rs                       |  1 +
+ src/handler/internal.rs                  |  3 +
+ src/handler/telegram.rs                  | 31 ++++++++--
+ src/service/message_service.rs           | 79 ++++++++++++++++++++++++++
+ src/service/mod.rs                       |  1 +
+ src/service/reply_override.rs            | 97 ++++++++++++++++++++++++++++++++
+ src/service/whatsapp_service.rs          | 56 +++++++++++++++---
+ src/storage/mod.rs                       |  3 +
+ src/storage/server.rs                    |  6 +-
+ 13 files changed, 304 insertions(+), 14 deletions(-)
+
+Commit c5c969f53b1c
+Author: efrizal-m <efrizalsy0424@gmail.com>
+Date: 2026-06-02T08:46:58+07:00
+Subject: Add categorization foundation tracking
+Body: [empty]
+Files changed: 13
+Churn: 588 lines
+Changed files:
+- migrations/058_categorization_foundation.sql: +51/-0
+- src/bin/migrate.rs: +69/-0
+- src/llm/classifier.rs: +42/-0
+- src/llm/types.rs: +6/-0
+- src/parser/debt.rs: +137/-0
+- src/parser/mod.rs: +1/-0
+- src/service/category_corrections.rs: +46/-0
+- src/service/debt_ledger.rs: +45/-0
+- src/service/edit_executor.rs: +17/-0
+- src/service/message_service.rs: +122/-13
+- src/service/mod.rs: +2/-0
+- src/service/whatsapp_service.rs: +31/-0
+- tests/llm_fallback.rs: +6/-0
+Stat summary:
+migrations/058_categorization_foundation.sql |  51 ++++++++++
+ src/bin/migrate.rs                           |  69 ++++++++++++++
+ src/llm/classifier.rs                        |  42 ++++++++
+ src/llm/types.rs                             |   6 ++
+ src/parser/debt.rs                           | 137 +++++++++++++++++++++++++++
+ src/parser/mod.rs                            |   1 +
+ src/service/category_corrections.rs          |  46 +++++++++
+ src/service/debt_ledger.rs                   |  45 +++++++++
+ src/service/edit_executor.rs                 |  17 ++++
+ src/service/message_service.rs               | 135 +++++++++++++++++++++++---
+ src/service/mod.rs                           |   2 +
+ src/service/whatsapp_service.rs              |  31 ++++++
+ tests/llm_fallback.rs                        |   6 ++
+ 13 files changed, 575 insertions(+), 13 deletions(-)
